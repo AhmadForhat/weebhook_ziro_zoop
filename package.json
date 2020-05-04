@@ -13,6 +13,7 @@
   "dependencies": {
     "@middy/core": "^1.0.0-beta.10",
     "@middy/http-json-body-parser": "^1.0.0-beta.10",
+    "@middy/http-multipart-body-parser": "^1.0.0",
     "@ziro/middleware": "^1.0.5",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
@@ -23,6 +24,6 @@
     "request-promise-native": "^1.0.8"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.50"
+    "@types/aws-lambda": "^8.10.51"
   }
 }

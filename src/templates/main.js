@@ -13,10 +13,10 @@ const lambda = handler =>
     middy(handler)
         .use(preflight)
         .use(allowedOrigin(allowed))
-        // .use(auth)
         .use(jsonBodyParser())
         .use(httpMultipartBodyParser())
         .use(errorHandler)
         .use(cors)
+        // .use(auth)
 
 module.exports = lambda

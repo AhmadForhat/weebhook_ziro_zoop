@@ -2,4 +2,3 @@ node_modules
 functions
 .DS_Store
 .env
-credentials.json

@@ -1,0 +1,52 @@
+{
+  "name": "providers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify-lambda serve ./src/lambdas",
+    "build": "netlify-lambda build ./src/lambdas",
+    "test": "ava",
+    "testGeral": "node src/apoio/testes/testGeral",
+    "testRespostaParcela2": "node src/apoio/testes/testResultParcelas2",
+    "testRespostaParcela1": "node src/apoio/testes/testResultParcela1",
+    "testComissoesRequest": "node ./src/apoio/comissoes/testes/testComissoesRequest",
+    "testAssessores2019": "node ./src/apoio/comissoes/testes/testAssessores2019",
+    "testAssessores2020": "node ./src/apoio/comissoes/testes/testAssessores2020",
+    "testCobranca2019": "node ./src/apoio/comissoes/testes/testCobranca2019",
+    "testLogistica2019": "node ./src/apoio/comissoes/testes/testLogistica2019",
+    "testVendas2019": "node ./src/apoio/comissoes/testes/testVendas2019",
+    "testProspeccao2020": "node ./src/apoio/comissoes/testes/testProspeccao2020",
+    "testCoeficiente": "node ./src/apoio/testes/testeCoeficiente",
+    "testReajustes": "node ./src/apoio/testes/testeReajustes"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziro-app/providers"
+  },
+  "keywords": [],
+  "author": "Ahmad Forhat",
+  "license": "ISC",
+  "dependencies": {
+    "@middy/core": "^1.0.0-beta.6",
+    "@middy/http-cors": "^1.0.0-beta.6",
+    "@middy/http-error-handler": "^1.0.0-beta.6",
+    "@middy/http-json-body-parser": "^1.0.0-beta.6",
+    "@middy/http-urlencode-body-parser": "^1.0.0-beta.6",
+    "@ziro/array-object": "^1.0.0",
+    "@ziro/decimal-usa": "^1.0.1",
+    "@ziro/middleware": "^1.0.4",
+    "@ziro/object-array": "^1.0.2",
+    "@ziro/string-to-date": "^1.0.0",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "http-errors": "^1.7.3",
+    "netlify-lambda": "^1.6.3",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.43",
+    "ava": "^3.1.0",
+    "eslint": "^6.8.0"
+  }
+}

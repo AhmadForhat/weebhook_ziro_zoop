@@ -1,34 +1,46 @@
 const main = require('../templates/main')
 const rp = require('request-promise-native')
-const { dateHourFormatterUTC3, dataHourFromatterZoop } = require('../utils/dateHourFormatterUTC3')
+const { db } = require('../firebase/firabaseConfig')
 const postSheet = require('../utils/postSheets')
+const translateStatus = require('../utils/translateStatus')
+const { dateHourFormatterUTC3, dataHourFromatterZoop } = require('../utils/dateHourFormatterUTC3')
 
 require('dotenv').config()
 
 const getEmployees = async ({ body }) => {
     const { payload } = body
-    const { id, status, payment_method } = payload
+    const { id, status:statusNovo , payment_method } = payload
     const { updated_at } = payment_method
     const corpo = [
         id,
         dateHourFormatterUTC3(new Date()),
         dateHourFormatterUTC3(dataHourFromatterZoop(updated_at)),
-        status
+        translateStatus(statusNovo)
     ]
     try {
         console.log(body)
-        const request = rp(postSheet(corpo))
-        console.log('responsa do update no googleSheets', request._rp_options.body)
-        return {
-            statusCode:200,
-            body: JSON.stringify({
-                mensagem: 'Status salvo com sucesso no Sheet',
-                data: dateHourFormatterUTC3(new Date()),
-                statusTransacao: body.payload.status
-            })
+        const requestSheets = await rp(postSheet(corpo))
+        console.log('responsa do update no googleSheets', requestSheets._rp_options.body)
+        try {
+            const requestFirebase = await db.collection('credit-card-payments')
+                .doc(id)
+                .update({
+                    status: translateStatus(statusNovo)
+                })
+            console.log('reposta do Firebase', requestFirebase)
+            return {
+                statusCode:200,
+                body: JSON.stringify({
+                    mensagem: 'Status salvo com sucesso no Sheet e no Firebase',
+                    data: dateHourFormatterUTC3(new Date()),
+                    statusTransacao: body.payload.status
+                })
+            }
+        } catch (error) {
+            console.log('erro no firebase', error)
         }
     } catch (error) {
-        console.log(error)
+        console.log('erro no sheets', error)
         return {
             statusCode: 500,
             body: JSON.stringify(error)

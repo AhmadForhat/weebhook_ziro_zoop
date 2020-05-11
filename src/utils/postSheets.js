@@ -14,7 +14,7 @@ const optionsPost = (body) =>{
             'apiResource': 'values',
             'apiMethod': 'append',
             'spreadsheetId': process.env.ID_SHEET,
-            'range': 'boletos gerados!A2',
+            'range': 'statusTransacao!A2',
             'resource': {
                 'values': [body]
             },

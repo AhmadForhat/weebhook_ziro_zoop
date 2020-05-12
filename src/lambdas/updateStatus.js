@@ -23,7 +23,7 @@ const updateStatus = async ({ body }) => {
         const { object } = payload
         const { id, status:statusNovo , payment_method } = object
         console.log('metodo de pagamento', payment_method)
-        console.log('status', status)
+        console.log('status', statusNovo)
         const { updated_at } = payment_method
         const corpo = [
             id,
@@ -47,7 +47,7 @@ const updateStatus = async ({ body }) => {
                 body: JSON.stringify({
                     mensagem: 'Status salvo com sucesso no Sheet e no Firebase',
                     data: dateHourFormatterUTC3(new Date()),
-                    statusTransacao: body.payload.status
+                    statusTransacao: statusNovo
                 })
             }
             // } catch (error) {

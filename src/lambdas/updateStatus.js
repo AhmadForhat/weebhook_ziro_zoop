@@ -18,7 +18,7 @@ const updateStatus = async ({ body }) => {
             })
         }
     }else if(body.resource === 'event'){
-        console.log('body de evento', body)
+        console.log('body de evento', body.payload)
         const { payload } = body
         const { object } = payload
         const { id, status:statusNovo , payment_method } = object

@@ -8,7 +8,16 @@ const { dateHourFormatterUTC3, dataHourFromatterZoop } = require('../utils/dateH
 require('dotenv').config()
 
 const updateStatus = async ({ body }) => {
-    if(body.payload){
+    if(body.type === 'ping'){
+        console.log('ping',body)
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                mensagem: 'Webhook cadastrado com sucessso!!',
+                data: dateHourFormatterUTC3(new Date())
+            })
+        }
+    }else if(body.payload.payment_method){
         console.log('body de evento', body)
         const { payload } = body
         const { id, status:statusNovo , payment_method } = payload
@@ -47,16 +56,6 @@ const updateStatus = async ({ body }) => {
                 statusCode: 500,
                 body: JSON.stringify(error)
             }
-        }
-    }if(body.type === 'ping'){
-        console.log('ping',body)
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                mensagem: 'Webhook cadastrado com sucessso!!',
-                data: dateHourFormatterUTC3(new Date()),
-                id: body.id
-            })
         }
     }else{
         console.log('não reconheceu body', body)

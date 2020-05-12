@@ -7,9 +7,9 @@ const { dateHourFormatterUTC3, dataHourFromatterZoop } = require('../utils/dateH
 
 require('dotenv').config()
 
-const getEmployees = async ({ body }) => {
+const updateStatus = async ({ body }) => {
     if(body.payload){
-        console.log(body)
+        console.log('body de evento', body)
         const { payload } = body
         const { id, status:statusNovo , payment_method } = payload
         const { updated_at } = payment_method
@@ -71,4 +71,4 @@ const getEmployees = async ({ body }) => {
 
 }
 
-module.exports = { handler: main(getEmployees) }
+module.exports = { handler: main(updateStatus) }

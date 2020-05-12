@@ -17,10 +17,13 @@ const updateStatus = async ({ body }) => {
                 data: dateHourFormatterUTC3(new Date())
             })
         }
-    }else if(body.payload.payment_method){
+    }else if(body.resource === 'event'){
         console.log('body de evento', body)
         const { payload } = body
-        const { id, status:statusNovo , payment_method } = payload
+        const { object } = payload
+        const { id, status:statusNovo , payment_method } = object
+        console.log('metodo de pagamento', payment_method)
+        console.log('status', status)
         const { updated_at } = payment_method
         const corpo = [
             id,
